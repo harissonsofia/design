@@ -179,6 +179,48 @@ should support:
 * Code unloading capabilities, especially in the context of code garbage
   collection and defragmentation.
 
+## Optimization and JIT library
+
+WebAssembly's JIT interface will likely be fairly low-level, exposing
+general-purpose primitives rather than higher-level functionality. Still,
+there is a need for higher-level functionality, and for greater flexibility
+than the WebAssembly spec can provide. An optimization and JIT library that
+would run inside WebAssembly and provide support and higher-level features
+would fit this need very well.
+
+Such a library wouldn't be part of the WebAssembly spec itself, but it's
+relevant to discuss here because features that we can expect to address in the
+libary are features that we can avoid adding to the spec, so it's a relevant
+part of the discussion.
+
+Some of the fundamental advantages of putting functionality in a library rather
+than in the spec and in implementations themselves include:
+ - A library can freely choose to offer greater degrees of undefined behavior,
+   implementation-defined behavior, unspecified behavior, and so on. This means
+   it can perform much more aggressive optimizations, including many that are
+   extremely common in optimizing compilers and might otherwise seem missing in
+   the WebAssembly spec itself:
+    - Constant folding, strength reduction, and code motion of math functions
+      such as sin, cos, exp, log, pow, atan2.
+    - Performing aggressive expression simplifications that depend on assuming
+      that integer arithmetic doesn't overflow.
+    - Performing GVN with redundant load elimination, and other optimizations
+      based on aliasing rules that incur undefined behavior if they are violated.
+
+ - A library can support higher-level features, and features that are tailored
+   to certain applications, whereas the WebAssembly spec itself is limited to
+   general-purpose primitives. Possible examples of this are:
+    - A richer type system, which could include things like complex, rational,
+      arbitrary bitwidth integers, non-power-of-2 SIMD types, inteveral
+      arithmetic, etc.
+    - A higher-level type system, which could include basic polymorphism of
+      various kinds (either with true dynamism or with monomorphisation).
+    - Richer control flow constructs.
+
+The library approach also means that applicatoins using a particular version
+of a library can get consistent behavior and performance, because of the
+determinism of the underlying WebAssembly platform.
+
 ## Multiprocess support
 
 * `vfork`.
@@ -270,51 +312,6 @@ Emulation libraries would have more flexibility to offer approximation
 techniques such as double-double arithmetic. If we standardize 128-bit
 floating point in WebAssembly, it will probably be standard IEEE-754
 quadruple precision.
-
-## Floating point library intrinsics
-
-These operations aren't needed for the MVP because they can be implemented in
-WebAssembly code and linked into WebAssembly modules at small size cost (as is
-traditionally done through C libraries such as libm). This approach:
-
-* Avoids a non-trivial specification burden for their semantics, precision, and
-  performance.
-* Allows developers to make different application-specific tradeoffs of
-  precision/robustness versus performance, while still getting deterministic
-  results across implementations.
-* Reduces the implementation burden for WebAssembly, since more than the few
-  math functions listed below may be needed by different developers.
-
-[Dynamic linking](FutureFeatures.md#dynamic-linking) will also allow caching of
-libm, making this already low-cost sharing trivial.
-
-Adding these intrinsics would potentially allow for better high-level backend
-optimization of these intrinsics that require builtin knowledge of their
-semantics. WebAssembly may support these operations in the future if data shows
-it would be useful. The rounding behavior of these operations would need
-clarification.
-
-
-  * `float64.sin`: trigonometric sine
-  * `float64.cos`: trigonometric cosine
-  * `float64.tan`: trigonometric tangent
-  * `float64.asin`: trigonometric arcsine
-  * `float64.acos`: trigonometric arccosine
-  * `float64.atan`: trigonometric  arctangent
-  * `float64.atan2`: trigonometric arctangent with two arguments
-  * `float64.exp`: exponentiate e
-  * `float64.ln`: natural logarithm
-  * `float64.pow`: exponentiate
-  * `float32.sin`: trigonometric sine
-  * `float32.cos`: trigonometric cosine
-  * `float32.tan`: trigonometric tangent
-  * `float32.asin`: trigonometric arcsine
-  * `float32.acos`: trigonometric arccosine
-  * `float32.atan`: trigonometric  arctangent
-  * `float32.atan2`: trigonometric arctangent with two arguments
-  * `float32.exp`: exponentiate e
-  * `float32.ln`: natural logarithm
-  * `float32.pow`: exponentiate
 
 ## Full IEEE-754 conformance
 
