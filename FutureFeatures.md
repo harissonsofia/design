@@ -190,7 +190,7 @@ would fit this need very well.
 
 Such a library wouldn't be part of the WebAssembly spec itself, but it's
 relevant to discuss here because features that we can expect to address in the
-libary are features that we can avoid adding to the spec.
+library are features that we can avoid adding to the spec.
 
 Some of the fundamental advantages of putting functionality in a library rather
 than in the spec and in implementations themselves include:
@@ -210,7 +210,7 @@ than in the spec and in implementations themselves include:
    to certain applications, whereas the WebAssembly spec itself is limited to
    general-purpose primitives. Possible examples of this are:
     - A richer type system, which could include things like complex, rational,
-      arbitrary bitwidth integers, non-power-of-2 SIMD types, inteveral
+      arbitrary bitwidth integers, non-power-of-2 SIMD types, interval
       arithmetic, etc.
     - A higher-level type system, which could include basic polymorphism of
       various kinds (either with true dynamism or with monomorphisation).
@@ -220,7 +220,7 @@ than in the spec and in implementations themselves include:
       operations, all of which can benefit from being integrated at the
       language level.
 
-The library approach also means that applicatoins using a particular version
+The library approach also means that applications using a particular version
 of a library can get consistent behavior and performance, because of the
 determinism of the underlying WebAssembly platform.
 
