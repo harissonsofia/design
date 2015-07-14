@@ -216,6 +216,10 @@ than in the spec and in implementations themselves include:
     - A higher-level type system, which could include basic polymorphism of
       various kinds (either with true dynamism or with monomorphisation).
     - Richer control flow constructs.
+    - A broader set of operations, such as string-handling operations,
+      data type serialization, testing facilities, and linear algebra
+      operations, all of which can benefit from being integrated at the
+      language level.
 
 The library approach also means that applicatoins using a particular version
 of a library can get consistent behavior and performance, because of the
