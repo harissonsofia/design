@@ -220,6 +220,11 @@ than in the spec and in implementations themselves include:
       operations, all of which can benefit from being integrated at the
       language level.
 
+ - A library can evolve over time to meet the changing needs of higher-level
+   languages. In practice, compiler IRs such as LLVM IR evolve to add new
+   features, change existing features, and sometimes remove features, and these
+   kinds of changes are much harder to do in a spec.
+
 The library approach also means that applications using a particular version
 of a library can get consistent behavior and performance, because of the
 determinism of the underlying WebAssembly platform.
