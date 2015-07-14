@@ -190,8 +190,7 @@ would fit this need very well.
 
 Such a library wouldn't be part of the WebAssembly spec itself, but it's
 relevant to discuss here because features that we can expect to address in the
-libary are features that we can avoid adding to the spec, so it's a relevant
-part of the discussion.
+libary are features that we can avoid adding to the spec.
 
 Some of the fundamental advantages of putting functionality in a library rather
 than in the spec and in implementations themselves include:
