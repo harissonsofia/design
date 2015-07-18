@@ -205,6 +205,9 @@ than in the spec and in implementations themselves include:
       that integer arithmetic doesn't overflow.
     - Performing GVN with redundant load elimination, and other optimizations
       based on aliasing rules that incur undefined behavior if they are violated.
+    - Vectorization that utilizes both floating point reassociation and
+      awareness of the underlying platform through
+      [feature testing](FeatureTest.md).
 
  - A library can support higher-level features, and features that are tailored
    to certain applications, whereas the WebAssembly spec itself is limited to
