@@ -200,7 +200,7 @@ than in the spec and in implementations themselves include:
    extremely common in optimizing compilers and might otherwise seem missing in
    the WebAssembly spec itself:
     - Constant folding, strength reduction, and code motion of math functions
-      such as sin, cos, exp, log, pow, atan2.
+      such as `sin`, `cos`, `exp`, `log`, `pow`, and `atan2`.
     - Performing aggressive expression simplifications that depend on assuming
       that integer arithmetic doesn't overflow.
     - Performing GVN with redundant load elimination, and other optimizations
