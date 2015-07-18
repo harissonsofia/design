@@ -181,12 +181,12 @@ should support:
 
 ## Optimization and JIT library
 
-WebAssembly's JIT interface will likely be fairly low-level, exposing
-general-purpose primitives rather than higher-level functionality. Still,
-there is a need for higher-level functionality, and for greater flexibility
-than the WebAssembly spec can provide. An optimization and JIT library that
-would run inside WebAssembly and provide support and higher-level features
-would fit this need very well.
+WebAssembly's Just-in-Time compilation (JIT) interface will likely be fairly
+low-level, exposing general-purpose primitives rather than higher-level
+functionality. Still, there is a need for higher-level functionality, and for
+greater flexibility than the WebAssembly spec can provide. An optimization and
+JIT library that would run inside WebAssembly and provide support and
+higher-level features would fit this need very well.
 
 Such a library wouldn't be part of the WebAssembly spec itself, but it's
 relevant to discuss here because features that we can expect to address in the
